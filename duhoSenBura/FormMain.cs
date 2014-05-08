@@ -73,7 +73,7 @@ namespace duhoSenBura
 
         private void webBrowser_main_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            webBrowser_main.Document.Window.ScrollTo(new Point(74, 74));
+            webBrowser_main.Document.Window.ScrollTo( duhoSenBura.Properties.Settings.Default.MainWindowOffset);
             webBrowser_main.Document.Body.Style = "overflow-x:hidden;overflow-y:hidden";
 
             return;
