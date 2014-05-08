@@ -22,8 +22,44 @@ namespace duhoSenBura
         private void Init()
         {
             this.LoadBrowserInfo();
+            this.InitFiddlerCore();
 
             return;
+        }
+
+        private void InitFiddlerCore()
+        {
+            /// クライアントへレスポンスを返した後に呼ばれるイベント
+            Fiddler.FiddlerApplication.AfterSessionComplete
+                        += new Fiddler.SessionStateHandler(FiddlerApplication_AfterSessionComplete);
+
+            /// Fiddlerを開始。ポートは自動選択
+            Fiddler.FiddlerApplication.Startup(0, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway);
+
+            /// 当該プロセスのプロキシを設定する。WebBroweserコントロールはこの設定を参照
+            Fiddler.URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}",
+                        Fiddler.FiddlerApplication.oProxy.ListenPort), "<local>");
+
+            return;
+        }
+
+        void FiddlerApplication_AfterSessionComplete(Fiddler.Session oSession)
+        {
+            var sessionData = string.Format("Session {0}({3}):HTTP {1} for {2}",
+                    oSession.id, oSession.responseCode, oSession.fullUrl, oSession.oResponse.MIMEType);
+
+            textBox_fiddler_raw.Text = sessionData + Environment.NewLine + textBox_fiddler_raw.Text;
+
+            return;
+        }
+
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            /// プロキシ設定を外す
+            Fiddler.URLMonInterop.ResetProxyInProcessToDefault();
+
+            /// Fiddlerを終了させる
+            Fiddler.FiddlerApplication.Shutdown();
         }
 
         private void LoadBrowserInfo()
@@ -44,8 +80,7 @@ namespace duhoSenBura
 
         private void button_update_Click(object sender, EventArgs e)
         {
-            var rowData = webBrowser_main.Document.Body.ScrollLeft.ToString();
-            this.DispOnMonitor( rowData);
+            this.LoadBrowserInfo();
 
             return;
         }

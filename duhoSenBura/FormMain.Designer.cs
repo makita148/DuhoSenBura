@@ -32,6 +32,7 @@
             this.webBrowser_main = new System.Windows.Forms.WebBrowser();
             this.button_update = new System.Windows.Forms.Button();
             this.textBox_monitor = new System.Windows.Forms.TextBox();
+            this.textBox_fiddler_raw = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox_url
@@ -46,7 +47,7 @@
             // 
             // webBrowser_main
             // 
-            this.webBrowser_main.Location = new System.Drawing.Point(92, 82);
+            this.webBrowser_main.Location = new System.Drawing.Point(12, 12);
             this.webBrowser_main.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser_main.Name = "webBrowser_main";
             this.webBrowser_main.ScrollBarsEnabled = false;
@@ -56,7 +57,7 @@
             // 
             // button_update
             // 
-            this.button_update.Location = new System.Drawing.Point(58, 663);
+            this.button_update.Location = new System.Drawing.Point(910, 12);
             this.button_update.Name = "button_update";
             this.button_update.Size = new System.Drawing.Size(75, 23);
             this.button_update.TabIndex = 2;
@@ -66,24 +67,37 @@
             // 
             // textBox_monitor
             // 
-            this.textBox_monitor.Location = new System.Drawing.Point(366, 604);
+            this.textBox_monitor.Location = new System.Drawing.Point(818, 41);
             this.textBox_monitor.Multiline = true;
             this.textBox_monitor.Name = "textBox_monitor";
             this.textBox_monitor.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_monitor.Size = new System.Drawing.Size(703, 141);
+            this.textBox_monitor.Size = new System.Drawing.Size(251, 451);
             this.textBox_monitor.TabIndex = 3;
+            // 
+            // textBox_fiddler_raw
+            // 
+            this.textBox_fiddler_raw.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_fiddler_raw.Location = new System.Drawing.Point(12, 498);
+            this.textBox_fiddler_raw.Multiline = true;
+            this.textBox_fiddler_raw.Name = "textBox_fiddler_raw";
+            this.textBox_fiddler_raw.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_fiddler_raw.Size = new System.Drawing.Size(1057, 247);
+            this.textBox_fiddler_raw.TabIndex = 4;
             // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1081, 782);
+            this.Controls.Add(this.textBox_fiddler_raw);
             this.Controls.Add(this.textBox_monitor);
             this.Controls.Add(this.button_update);
             this.Controls.Add(this.webBrowser_main);
             this.Controls.Add(this.textBox_url);
             this.Name = "Form_main";
             this.Text = "づほと川内ちゃんを愛でるための専用ブラウザ";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,6 +109,7 @@
         private System.Windows.Forms.WebBrowser webBrowser_main;
         private System.Windows.Forms.Button button_update;
         private System.Windows.Forms.TextBox textBox_monitor;
+        private System.Windows.Forms.TextBox textBox_fiddler_raw;
     }
 }
 
