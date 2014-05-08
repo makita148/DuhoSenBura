@@ -28,48 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel_browser = new System.Windows.Forms.Panel();
-            this.webBrowser_main = new System.Windows.Forms.WebBrowser();
             this.textBox_url = new System.Windows.Forms.TextBox();
-            this.panel_browser.SuspendLayout();
+            this.webBrowser_main = new System.Windows.Forms.WebBrowser();
+            this.button_update = new System.Windows.Forms.Button();
+            this.textBox_monitor = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // panel_browser
+            // textBox_url
             // 
-            this.panel_browser.Controls.Add(this.webBrowser_main);
-            this.panel_browser.Location = new System.Drawing.Point(12, 12);
-            this.panel_browser.Name = "panel_browser";
-            this.panel_browser.Size = new System.Drawing.Size(800, 480);
-            this.panel_browser.TabIndex = 0;
+            this.textBox_url.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_url.Location = new System.Drawing.Point(12, 751);
+            this.textBox_url.Name = "textBox_url";
+            this.textBox_url.Size = new System.Drawing.Size(1057, 19);
+            this.textBox_url.TabIndex = 1;
+            this.textBox_url.Text = "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/";
             // 
             // webBrowser_main
             // 
-            this.webBrowser_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser_main.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser_main.Location = new System.Drawing.Point(92, 82);
             this.webBrowser_main.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser_main.Name = "webBrowser_main";
+            this.webBrowser_main.ScrollBarsEnabled = false;
             this.webBrowser_main.Size = new System.Drawing.Size(800, 480);
             this.webBrowser_main.TabIndex = 0;
             this.webBrowser_main.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_main_DocumentCompleted);
             // 
-            // textBox_url
+            // button_update
             // 
-            this.textBox_url.Location = new System.Drawing.Point(12, 587);
-            this.textBox_url.Name = "textBox_url";
-            this.textBox_url.Size = new System.Drawing.Size(799, 19);
-            this.textBox_url.TabIndex = 1;
-            this.textBox_url.Text = "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/";
+            this.button_update.Location = new System.Drawing.Point(58, 663);
+            this.button_update.Name = "button_update";
+            this.button_update.Size = new System.Drawing.Size(75, 23);
+            this.button_update.TabIndex = 2;
+            this.button_update.Text = "状態更新";
+            this.button_update.UseVisualStyleBackColor = true;
+            this.button_update.Click += new System.EventHandler(this.button_update_Click);
+            // 
+            // textBox_monitor
+            // 
+            this.textBox_monitor.Location = new System.Drawing.Point(366, 604);
+            this.textBox_monitor.Multiline = true;
+            this.textBox_monitor.Name = "textBox_monitor";
+            this.textBox_monitor.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_monitor.Size = new System.Drawing.Size(703, 141);
+            this.textBox_monitor.TabIndex = 3;
             // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 618);
+            this.ClientSize = new System.Drawing.Size(1081, 782);
+            this.Controls.Add(this.textBox_monitor);
+            this.Controls.Add(this.button_update);
+            this.Controls.Add(this.webBrowser_main);
             this.Controls.Add(this.textBox_url);
-            this.Controls.Add(this.panel_browser);
             this.Name = "Form_main";
             this.Text = "づほと川内ちゃんを愛でるための専用ブラウザ";
-            this.panel_browser.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,9 +91,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel_browser;
-        private System.Windows.Forms.WebBrowser webBrowser_main;
         private System.Windows.Forms.TextBox textBox_url;
+        private System.Windows.Forms.WebBrowser webBrowser_main;
+        private System.Windows.Forms.Button button_update;
+        private System.Windows.Forms.TextBox textBox_monitor;
     }
 }
 

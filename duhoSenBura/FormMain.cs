@@ -36,7 +36,25 @@ namespace duhoSenBura
 
         private void webBrowser_main_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            webBrowser_main.Document.Window.ScrollTo(new Point(74, 74));
+            webBrowser_main.Document.Body.Style = "overflow-x:hidden;overflow-y:hidden";
 
+            return;
+        }
+
+        private void button_update_Click(object sender, EventArgs e)
+        {
+            var rowData = webBrowser_main.Document.Body.ScrollLeft.ToString();
+            this.DispOnMonitor( rowData);
+
+            return;
+        }
+
+        private void DispOnMonitor(string aVal)
+        {
+            textBox_monitor.Text += Environment.NewLine + aVal;
+
+            return;
         }
     }
 }
