@@ -12,6 +12,8 @@ namespace duhoSenBura
 {
     public partial class Form_main : Form
     {
+        private duhoSenBura.Data.DuhoSenEntities entDSB = new Data.DuhoSenEntities();
+
         public Form_main()
         {
             InitializeComponent();
@@ -81,14 +83,27 @@ namespace duhoSenBura
 
         private void button_update_Click(object sender, EventArgs e)
         {
-            this.LoadBrowserInfo();
+            try
+            {
+                var rankList = entDSB.MRank;
+                var rowData = String.Join(Environment.NewLine,
+                    rankList.Select(q =>
+                    q.code + "/" + q.value).ToArray());
+
+                this.DispOnMonitor(rowData);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
 
             return;
         }
 
         private void DispOnMonitor(string aVal)
         {
-            textBox_monitor.Text += Environment.NewLine + aVal;
+            textBox_monitor.Text =  aVal + Environment.NewLine + textBox_monitor.Text;
 
             return;
         }
