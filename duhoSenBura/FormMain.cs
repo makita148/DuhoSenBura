@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Codeplex.Data;
 
 namespace duhoSenBura
 {
@@ -17,6 +18,8 @@ namespace duhoSenBura
         public Form_main()
         {
             InitializeComponent();
+
+            
 
             this.Init();
         }
@@ -46,12 +49,54 @@ namespace duhoSenBura
             return;
         }
 
-        void FiddlerApplication_AfterSessionComplete(Fiddler.Session oSession)
+        void FiddlerApplication_AfterSessionComplete(Fiddler.Session aSession)
         {
+            var resp = aSession.oResponse;
             var sessionData = string.Format("{4} :Session {0}({3}):HTTP {1} for {2}",
-                    oSession.id, oSession.responseCode, oSession.fullUrl, oSession.oResponse.MIMEType, DateTime.Now.ToString());
+                    aSession.id, aSession.responseCode, aSession.fullUrl, resp.MIMEType, DateTime.Now.ToString());
 
-            textBox_fiddler_raw.Text = sessionData + Environment.NewLine + textBox_fiddler_raw.Text;
+            switch (resp.MIMEType)
+            {
+                case "text/plain":
+                    if (!aSession.fullUrl.EndsWith("api_start2"))
+                    {
+                        try
+                        {
+                            var requestBody = Encoding.UTF8.GetString(aSession.responseBodyBytes);
+                            var jsonSrc = requestBody.Substring(requestBody.IndexOf('=') + 1);
+                            var json = DynamicJson.Parse(jsonSrc);
+
+                            var kvData = new List<String>();
+
+                            foreach (KeyValuePair<String, dynamic> item in json)
+                            {
+                                kvData.Add(item.Key + ":" + item.Value.ToString());
+                            }
+
+                            this.DispOnMonitor(sessionData + Environment.NewLine +
+                                String.Join(Environment.NewLine, kvData.ToArray()));
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            try
+            {
+                textBox_fiddler_raw.Text = sessionData + Environment.NewLine + textBox_fiddler_raw.Text;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             return;
         }
@@ -82,6 +127,20 @@ namespace duhoSenBura
         }
 
         private void button_update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return;
+        }
+
+        private void DispSDFTest()
         {
             try
             {
