@@ -37,16 +37,17 @@ namespace duhoSenBura
             Fiddler.FiddlerApplication.Startup(0, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway);
 
             /// 当該プロセスのプロキシを設定する。WebBroweserコントロールはこの設定を参照
-            Fiddler.URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}",
-                        Fiddler.FiddlerApplication.oProxy.ListenPort), "<local>");
+            Fiddler.URLMonInterop.SetProxyInProcess(
+                string.Format("127.0.0.1:{0}", Fiddler.FiddlerApplication.oProxy.ListenPort), 
+                "<local>");
 
             return;
         }
 
         void FiddlerApplication_AfterSessionComplete(Fiddler.Session oSession)
         {
-            var sessionData = string.Format("Session {0}({3}):HTTP {1} for {2}",
-                    oSession.id, oSession.responseCode, oSession.fullUrl, oSession.oResponse.MIMEType);
+            var sessionData = string.Format("{4} :Session {0}({3}):HTTP {1} for {2}",
+                    oSession.id, oSession.responseCode, oSession.fullUrl, oSession.oResponse.MIMEType, DateTime.Now.ToString());
 
             textBox_fiddler_raw.Text = sessionData + Environment.NewLine + textBox_fiddler_raw.Text;
 
